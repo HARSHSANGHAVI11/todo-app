@@ -7,13 +7,20 @@ function App() {
 
   const addTodo = () => {
     if (input.trim() === '') return;
-    setTodos([...todos, input]);
+    setTodos([...todos, { text: input, completed: false }]);
     setInput('');
   };
 
   const removeTodo = (index) => {
     const newTodos = todos.filter((_, i) => i !== index);
     setTodos(newTodos);
+  };
+
+  const toggleCompletion = (index) => {
+    const updatedTodos = todos.map((todo, i) =>
+      i === index ? { ...todo, completed: !todo.completed } : todo
+    );
+    setTodos(updatedTodos);
   };
 
   return (
@@ -30,8 +37,11 @@ function App() {
       </div>
       <ul className="todo-list">
         {todos.map((todo, i) => (
-          <li key={i} className="todo-card">
-            <span>{todo}</span>
+          <li
+            key={i}
+            className={`todo-card ${todo.completed ? 'completed' : ''}`}
+          >
+            <span onClick={() => toggleCompletion(i)}>{todo.text}</span>
             <button onClick={() => removeTodo(i)}>❌</button>
           </li>
         ))}
