@@ -31,18 +31,26 @@ h1 {
   font-weight: bold;
 }
 
+/* Updated form layout starts here */
 .input-container {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  flex-direction: column;
+  gap: 12px;
+  background: #f0f3ff;
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid #d2d4f0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  margin-bottom: 24px;
 }
 
 .input-container input {
-  flex: 1;
+  width: 100%;
   padding: 14px 18px;
   border-radius: 12px;
   border: 1px solid #bfc0c0;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  font-size: 16px;
   transition: border 0.2s ease;
 }
 
@@ -52,19 +60,22 @@ h1 {
 }
 
 .input-container button {
+  width: 100%;
   padding: 14px 20px;
   background: linear-gradient(145deg, #6a5acd, #836fff);
   color: white;
   border: none;
   border-radius: 12px;
-  cursor: pointer;
+  font-size: 16px;
   font-weight: bold;
+  cursor: pointer;
   transition: background 0.3s ease;
 }
 
 .input-container button:hover {
   background: linear-gradient(145deg, #5d4bc4, #6f5de3);
 }
+/* Updated form layout ends here */
 
 .todo-list {
   list-style-type: none;
