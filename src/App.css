@@ -96,3 +96,19 @@ h1 {
 .todo-card button:hover {
   color: #e64a19;
 }
+.todo-card .edit-input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #aaa;
+  margin-right: 10px;
+}
+
+.todo-card .action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.todo-card .action-buttons button {
+  font-size: 16px;
+}

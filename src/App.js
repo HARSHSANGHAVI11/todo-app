@@ -4,6 +4,8 @@ import './App.css';
 function App() {
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState('');
+  const [editIndex, setEditIndex] = useState(null);
+  const [editText, setEditText] = useState('');
 
   const addTodo = () => {
     if (input.trim() === '') return;
@@ -14,6 +16,10 @@ function App() {
   const removeTodo = (index) => {
     const newTodos = todos.filter((_, i) => i !== index);
     setTodos(newTodos);
+    if (editIndex === index) {
+      setEditIndex(null);
+      setEditText('');
+    }
   };
 
   const toggleCompletion = (index) => {
@@ -21,6 +27,21 @@ function App() {
       i === index ? { ...todo, completed: !todo.completed } : todo
     );
     setTodos(updatedTodos);
+  };
+
+  const startEdit = (index) => {
+    setEditIndex(index);
+    setEditText(todos[index].text);
+  };
+
+  const saveEdit = () => {
+    if (editText.trim() === '') return;
+    const updatedTodos = todos.map((todo, i) =>
+      i === editIndex ? { ...todo, text: editText } : todo
+    );
+    setTodos(updatedTodos);
+    setEditIndex(null);
+    setEditText('');
   };
 
   return (
@@ -41,8 +62,25 @@ function App() {
             key={i}
             className={`todo-card ${todo.completed ? 'completed' : ''}`}
           >
-            <span onClick={() => toggleCompletion(i)}>{todo.text}</span>
-            <button onClick={() => removeTodo(i)}>❌</button>
+            {editIndex === i ? (
+              <>
+                <input
+                  type="text"
+                  value={editText}
+                  onChange={(e) => setEditText(e.target.value)}
+                  className="edit-input"
+                />
+                <button onClick={saveEdit}>💾</button>
+              </>
+            ) : (
+              <>
+                <span onClick={() => toggleCompletion(i)}>{todo.text}</span>
+                <div className="action-buttons">
+                  <button onClick={() => startEdit(i)}>✏️</button>
+                  <button onClick={() => removeTodo(i)}>❌</button>
+                </div>
+              </>
+            )}
           </li>
         ))}
       </ul>
